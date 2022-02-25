@@ -13,3 +13,7 @@ clair:
   notifier:
     attempts: 3
     renotifyinterval: 2h
+  verifier_proxies:
+  - enabled: true
+    # The port at which Clair will listen.
+    listen_addr: :6060

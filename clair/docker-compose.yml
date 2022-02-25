@@ -5,9 +5,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: username # The PostgreSQL user (useful to connect to the database)
-      POSTGRES_PASSWORD: password # The PostgreSQL password (useful to connect to the database)
-      POSTGRES_DB: clair # 
+      POSTGRES_USER: username 
+      POSTGRES_PASSWORD: password 
+      POSTGRES_DB: clair 
     volumes:
       - ./db-data/:/var/lib/postgresql/data/
   clair:
@@ -18,7 +18,7 @@ services:
       - ./docker-compose-data/clair-tmp/:/tmp/:rw
     depends_on: 
       - "database"
-    command: [--log-level=debug, --config, /config/config.yml]
+    command: ["./wait-for-it.sh", "database:5432", "--", "-conf", "/config/config.yml"]
     user: root
 
   clairctl:
