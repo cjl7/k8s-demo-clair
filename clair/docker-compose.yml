@@ -17,8 +17,7 @@ services:
       - ./docker-compose-data/clair-config/:/config/:ro
       - ./docker-compose-data/clair-tmp/:/tmp/:rw
     depends_on: 
-      database:
-        condition: service_started
+      - "database"
     command: [--log-level=debug, --config, /config/config.yml]
     user: root
 
@@ -31,6 +30,5 @@ services:
       - ./docker-compose-data/clairctl-reports/:/reports/:rw
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on: 
-      clair: 
-        condition: service_started
+      - "clair" 
     user: root
